@@ -29,6 +29,20 @@ public class PCB_LL
 		return QReady.get(i0)	;
 	}
 	
+	public synchronized PCB removeFirst()
+	{
+		return QReady.removeFirst() ;
+	}
+		
+	public synchronized PCB removeLast()
+	{
+		return QReady.removeLast()	;
+	}
+	
+	public synchronized PCB remove(int	i0)
+	{
+		return QReady.remove(i0)	;
+	}
 	//	set methods
 	
 	public synchronized void addFirst(PCB pcb0)
@@ -44,5 +58,17 @@ public class PCB_LL
 	public synchronized void add(int i0	,PCB pcb0)
 	{
 		QReady.add(i0, pcb0)	;
+	}
+	
+	//	process methods
+	
+	public synchronized boolean isEmpty()
+	{
+		return QReady.isEmpty() ;
+	}
+
+	public synchronized int size()
+	{
+		return QReady.size() ;
 	}
 }

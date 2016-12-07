@@ -4,19 +4,20 @@ import java.util.LinkedList;
 public class IOProcess extends Thread
 {
 	Random	r1 =	new Random();
-	private final PCB pcb;
-	private final LinkedList<PCB> QReady ;
+	private PCB 	pcb	;
+	private PCB_LL	pcbLL	;
 	
 	public IOProcess	(PCB pcb0
-						,LinkedList<PCB> qr0
+						,PCB_LL	pcb_LL0
 						)
 	{
 		this.pcb	= pcb0 ;
-		this.QReady	= qr0 ;
+		this.pcbLL	= pcb_LL0 ;
 	}
 	
 	public void run() 
 	{
+		pcb	= pcbLL.removeFirst()	;
 		pcb.set_state("Wait");
 		
 		System.out.printf("\t>> IOProcess start ID: %d <<\n"	
@@ -26,7 +27,7 @@ public class IOProcess extends Thread
 		try 
 		{
 			Thread.sleep((r1.nextInt(500)+500));
-			this.QReady.addLast(pcb);
+			pcbLL.addLast(pcb);
 		} 
 		catch (InterruptedException e) 
 		{
@@ -35,7 +36,7 @@ public class IOProcess extends Thread
 		
 		System.out.printf("\t>> IOProcess end for ID: %d \tQR count: %d<<\n"
 				,pcb.get_ID()
-				,QReady.size()
+				,pcbLL.size()
 				);
 		return ;
 	}
